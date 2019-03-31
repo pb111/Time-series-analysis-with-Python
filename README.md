@@ -3,7 +3,7 @@
 A time series is a series of data points recorded at different time intervals. The time series analysis means analyzing the time series data using various statistical tools and techniques. In this project, I analyze the time series dataset – **Parking Birmingham** downloaded from the UCI machine learning repository.
 
 
-====================================================================================
+================================================================================
 
 
 ## Table of contents
