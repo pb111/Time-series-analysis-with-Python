@@ -1,6 +1,7 @@
 # Time Series Analysis in Python Project
 
-A time series is a series of data points recorded at different time intervals. The time series analysis means analyzing the time series data using various statistical tools and techniques. In this project, I analyze the time series dataset – **Parking Birmingham** downloaded from the UCI machine learning repository.
+
+A time series is a series of data points recorded at different time intervals. The time series analysis means analyzing the time series data using various statistical tools and techniques. In this project, I analyze the  **Parking Birmingham** time series dataset downloaded from the UCI machine learning repository.
 
 
 ================================================================================
@@ -66,6 +67,7 @@ The table of contents of this project are as follows:-
 18.	References
 
 
+================================================================================
 
 
 
@@ -74,11 +76,16 @@ The table of contents of this project are as follows:-
 A time series data is a series of data points or observations recorded at different or regular time intervals. In general, a time series is a sequence of data points taken at equally spaced time intervals. The frequency of recorded data points may be hourly, daily, weekly, monthly, quarterly or annually.
 A time series analysis encompasses statistical methods for analyzing time series data. These methods enable us to extract meaningful statistics, patterns and other characteristics of the data. Time series are visualized with the help of line charts. So, time series analysis involves understanding inherent aspects of the time series data so that we can create meaningful and accurate forecasts.
 Applications of time series are used in statistics, finance or business applications. A very common example of time series data is the daily closing value of the stock index like NASDAQ or Dow Jones. Other common applications of time series are sales and demand forecasting, weather forecasting, econometrics, signal processing, pattern recognition and earthquake prediction.
-In this project, I conduct time series analysis of the **Parking Birmingham ** dataset downloaded from the UCI machine learning repository.
+In this project, I conduct time series analysis of the **Parking Birmingham** dataset downloaded from the UCI machine learning repository.
 Before that, we should know about types of data and time series terminology.
 
 
+================================================================================
+
+
 ## 2. Types of data
+
+
 As stated above, the time series analysis is the statistical analysis of the time series data. A time series data means that data is recorded at different time periods or intervals. The time series data may be of three types:-
 
 1. **Time series data** - The observations of the values of a variable recorded at different points in time is called time series data.
@@ -88,7 +95,7 @@ As stated above, the time series analysis is the statistical analysis of the tim
 3.**Pooled data**- It is the combination of time series data and cross sectional data.
 
 
-
+================================================================================
 
 
 ## 3. Time series terminology
@@ -114,7 +121,7 @@ There are various terms and concepts in time series that we should know. These a
 7.	**ARIMA** - ARIMA stands for Auto Regressive Integrated Moving Average.
 
 
-
+================================================================================
 
 
 ## 4. Import Python packages
@@ -140,6 +147,7 @@ import seaborn as sns
 sns.set()`
 
 
+================================================================================
 
 
 ## 5. Import dataset
@@ -151,17 +159,22 @@ Now, I will import the dataset to be used in this project. I will import the req
 df = pd.read_csv(data)`
 
 
-
-
+================================================================================
 
 
 ## 6. Dataset description
 
+
 I have used the `Parking Birmingham Data Set` for this project. The data set is about the car parking in Birmingham city in UK. The data shows the occupancy rates (8:00 to 16:30) of the cars from 2016/10/04 to 2016/12/19. The data set contains 35717 number of instances and 4 attributes. 
+
 
 I have downloaded this data set from the UCI Machine Learning repository. It can be found at the following url:-
 
+
 https://archive.ics.uci.edu/ml/datasets/Parking+Birmingham
+
+
+================================================================================
 
 
 ## 7. Exploratory data analysis
@@ -241,6 +254,7 @@ again check the data type of df dataframe
 Now, we can see that the data type of `Date` column is `datetime`.
 
 
+================================================================================
 
 
 ## 8. Indexing with time-series data
@@ -255,8 +269,7 @@ df.index`
 The `dtype=datetime[ns]` field confirms that the index is made up of `datestamp` object. The `length=35717` suggests that we have 35717 datestamps. But, the `freq=None` parameter suggests that the frequency for the datestamps is not specified.
 
 
-
-
+================================================================================
 
 
 ## 9. Resampling the timeseries data
@@ -275,6 +288,8 @@ y.head(10)`
 
 Here, the term 'D' means that we group the data in buckets by each day and compute the daily mean.
 
+
+================================================================================
 
 
 ## 10. Handling missing values in time series data
@@ -295,7 +310,13 @@ Now, I will again check for missing values in the time series.
 `y.isnull().sum()`
 
 The above command shows that there are no missing values in the time series.
+
+
+================================================================================
+
+
 ## 11. Visualizing the time series data
+
 
 Visualizing the time series data is an important step in time series analysis. It will help us to visualize several important things as follows:-
 
@@ -321,7 +342,11 @@ plt.show()`
 The plot reveals some interesting pattern in the time series. It has a seasonality pattern but no increasing or decreasing trend. The pattern reveals that the `Occupancy` has increased in December month. May be it is due to Christmas celebrations in December.
 
 
+================================================================================
+
+
 ## 12. Seasonal decomposition with time series data
+
 
 There is another method to visualize the time series data. This method is called **time-series decomposition**. It allows us to decompose the time series into three distinct components - trend, seasonality and noise.
 
@@ -341,6 +366,8 @@ plt.show()`
 
 Time series decomposition makes it easy to visualize the data in clear manner. It helps us to identify variation in the time series. The above plot shows the upwards trend in time series. It can be used to understand the structure of the time series. The time series decomposition is important because many forecasting methods are built upon this concept of structured decomposition to produce forecasts.
 
+
+================================================================================
 
 
 ## 13. The ARIMA Time Series Model
@@ -366,6 +393,7 @@ Non-seasonal ARIMA models are generally denoted by `ARIMA(p,d,q)` where paramete
 Seasonal ARIMA models are usually denoted by `ARIMA(p,d,q)(P,D,Q)s`, where `s` refers to the number of periods in each season, and the uppercase P,D,Q refer to the autoregressive, differencing and moving average terms for the seasonal part of the ARIMA model. The term `s` refers to the periodicity of the time series.
 
 
+================================================================================
 
 
 ## 14.	Parameter Selection for the ARIMA Time Series Model
@@ -409,8 +437,7 @@ The following code snippet iterates through combinations of parameters and uses 
 The code output suggests that SARIMAX(1, 1, 1)x(0, 1, 1, 4) provides the lowest AIC value of 767.8663. So, we should consider this to be the optimal option out of all the models considered.
 
 
-
-
+================================================================================
 
 
 ## 15.Fitting an ARIMA Time Series Model
@@ -460,8 +487,7 @@ So, we can conclude that our model does not produce a satisfactory fit to the ti
 Although, the model does not produce a satisfactory fit to the data, but I will use the same model to illustrate the process of validating and producing the forecasts for demonstration purposes.
 
 
-
-
+================================================================================
 
 
 ## 16.	Producing and Visualizing the Forecasts
@@ -492,12 +518,16 @@ plt.show()`
 The forecast values and associated confidence intervals can now be used to further understand the time series and understand it.
 
 
+================================================================================
+
+
 ## 17.	Conclusion
 
 
 In this project, I implement a seasonal ARIMA time series model in Python to predict Occupancy rates of car parks in Parking Birmingham Data Set. The forecasts show that the time series model is expected to continue increasing at a steady pace. As we forecast further into the future, we become less confident in our values.
 
 
+================================================================================
 
 
 ## 18. References
