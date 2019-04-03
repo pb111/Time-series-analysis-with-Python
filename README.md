@@ -102,7 +102,7 @@ As stated above, the time series analysis is the statistical analysis of the tim
 
 
 
-3.**Pooled data**- It is the combination of time series data and cross sectional data.
+3. **Pooled data**- It is the combination of time series data and cross sectional data.
 
 
 ================================================================================
