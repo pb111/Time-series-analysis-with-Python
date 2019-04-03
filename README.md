@@ -153,22 +153,22 @@ Also, I will use the Seaborn default plotting characteristics with sns.set().
 So, the code look as follows:-
 
 
-`import numpy as np
+`import numpy as np`
 
 
-import pandas as pd
+`import pandas as pd`
 
 
-import matplotlib.pyplot as plt
+`import matplotlib.pyplot as plt`
 
 
-import seaborn as sns
+`import seaborn as sns`
 
 
-%matplotlib inline
+`%matplotlib inline`
 
 
-sns.set()`
+`sns.set()`
 
 
 ================================================================================
@@ -180,10 +180,10 @@ sns.set()`
 Now, I will import the dataset to be used in this project. I will import the required dataset with the pandas `read_csv()` function. 
 
 
-`data = 'C:/datasets/dataset.csv'
+`data = 'C:/datasets/dataset.csv'`
 
 
-df = pd.read_csv(data)`
+`df = pd.read_csv(data)`
 
 
 ================================================================================
@@ -273,10 +273,10 @@ again view the first ten rows of dataset
 Now, I will remove redundant columns from the time series dataset.
 
 
-`cols = ['SystemCodeNumber', 'Capacity', 'LastUpdated', 'Time']
+`cols = ['SystemCodeNumber', 'Capacity', 'LastUpdated', 'Time']`
 
 
-df.drop(cols, axis=1, inplace=True)`
+`df.drop(cols, axis=1, inplace=True)`
 
 
 Now, I will check the data types of the columns.
@@ -309,10 +309,10 @@ Now, we can see that the data type of `Date` column is `datetime`.
 When working with time-series data in Python we should always set dates as the index. So, I will set `Date` column as the index of the dataframe.
 
 
-`df.set_index('Date', inplace=True)
+`df.set_index('Date', inplace=True)`
 
 
-df.index`
+`df.index`
 
 
 The `dtype=datetime[ns]` field confirms that the index is made up of `datestamp` object. The `length=35717` suggests that we have 35717 datestamps. But, the `freq=None` parameter suggests that the frequency for the datestamps is not specified.
@@ -330,10 +330,10 @@ When we take a closer look at the timeseries data, we can see that there are dif
 I will use the pandas dataframe `resample()` function which is primarily used for time series data. It allows us to group the time-series into buckets (1day or 1 month), apply a function on each group (mean) and produce the resampled data.
 
 
-`y=df['Occupancy'].resample('D').mean()
+`y=df['Occupancy'].resample('D').mean()`
 
 
-y.head(10)`
+`y.head(10)`
 
 
 Here, the term 'D' means that we group the data in buckets by each day and compute the daily mean.
@@ -394,13 +394,14 @@ The visualization helps to answer these questions.
 Visualize the time series data
 
 
-`y.plot(figsize=(15, 6))
+`y.plot(figsize=(15, 6))`
 
 
-plt.show()`
+`plt.show()`
 
 
-The plot reveals some interesting pattern in the time series. It has a seasonality pattern but no increasing or decreasing trend. The pattern reveals that the `Occupancy` has increased in December month. May be it is due to Christmas celebrations in December.
+The plot reveals some interesting pattern in the time series. It has a seasonality pattern but no increasing or decreasing trend. 
+The pattern reveals that the `Occupancy` has increased in December month. May be it is due to Christmas celebrations in December.
 
 
 ================================================================================
@@ -418,19 +419,19 @@ Python provides a `statsmodels` module which provides tools and techniques for s
 Seasonal decomposition returns a figure of relatively small size. So the first two lines of code chunk ensures that the output figure is large enough for us to visualize. We can perform seasonal decomposition in Python with the following lines of code:-
 
 
-`from pylab import rcParams
+`from pylab import rcParams`
 
 
-rcParams['figure.figsize'] = 16, 8
+`rcParams['figure.figsize'] = 16, 8`
 
 
-decomposition = sm.tsa.seasonal_decompose(y, model='additive')
+`decomposition = sm.tsa.seasonal_decompose(y, model='additive')`
 
 
-fig = decomposition.plot()
+`fig = decomposition.plot()`
 
 
-plt.show()`
+`plt.show()`
 
 
 Time series decomposition makes it easy to visualize the data in clear manner. It helps us to identify variation in the time series. 
@@ -479,37 +480,37 @@ Now, I will fit the time series data with a seasonal ARIMA model. I have to find
 The following code will use a grid search to iteratively explore different combinations of parameters. For each combination of parameters, we fit a new seasonal ARIMA model with the `SARIMAX()` function from the statsmodels module and assess its overall quality. The optimal set of parameters will be the one that yields the best performance.
 
 
-`Define the p, d and q parameters to take any value between 0 and 2
+Define the p, d and q parameters to take any value between 0 and 2
 
 
-p = d = q = range(0, 2)`
+`p = d = q = range(0, 2)`
 
 
-`Generate all different combinations of p, q and q triplets
+Generate all different combinations of p, q and q triplets
 
 
-pdq = list(itertools.product(p, d, q))`
+`pdq = list(itertools.product(p, d, q))`
 
 
-`Generate all different combinations of seasonal p, q and q triplets
+Generate all different combinations of seasonal p, q and q triplets
 
 
-seasonal_pdq = [(x[0], x[1], x[2], 4) for x in list(itertools.product(p, d, q))]`
+`seasonal_pdq = [(x[0], x[1], x[2], 4) for x in list(itertools.product(p, d, q))]`
 
 
-`print('Examples of parameter combinations for Seasonal ARIMA are as follows:-')
+`print('Examples of parameter combinations for Seasonal ARIMA are as follows:-')`
 
 
-print('SARIMAX: {} x {}'.format(pdq[1], seasonal_pdq[1]))
+`print('SARIMAX: {} x {}'.format(pdq[1], seasonal_pdq[1]))`
 
 
-print('SARIMAX: {} x {}'.format(pdq[1], seasonal_pdq[2]))
+`print('SARIMAX: {} x {}'.format(pdq[1], seasonal_pdq[2]))`
 
 
-print('SARIMAX: {} x {}'.format(pdq[2], seasonal_pdq[3]))
+`print('SARIMAX: {} x {}'.format(pdq[2], seasonal_pdq[3]))`
 
 
-print('SARIMAX: {} x {}'.format(pdq[2], seasonal_pdq[4]))`
+`print('SARIMAX: {} x {}'.format(pdq[2], seasonal_pdq[4]))`
 
 
 
@@ -539,25 +540,25 @@ I have identified the optimal set of parameters that produces the best fit model
 into a new `SARIMAX` model.
 
 
-`model = sm.tsa.statespace.SARIMAX(y,
+`model = sm.tsa.statespace.SARIMAX(y,`
 
 
-                                order=(1, 1, 1),
+                               `order=(1, 1, 1),`
                                 
                             
-                                seasonal_order=(0, 1, 1, 4),
+                                `seasonal_order=(0, 1, 1, 4),`
                                 
                                 
-                                enforce_stationarity=False,
+                                `enforce_stationarity=False,`
                                 
                                 
-                                enforce_invertibility=False)
+                                `enforce_invertibility=False)`
                                 
 
-results = model.fit()
+`results = model.fit()`
 
 
-print(results.summary().tables[1])`
+`print(results.summary().tables[1])`
 
 
 The above summary table displays significant amount of information. The coef column shows the weight or importance of each feature 
@@ -568,10 +569,10 @@ Now, I will run model diagnostics to detect any unusual behaviour. It is importa
 the assumptions made by the model have been violated. The `plot_diagnostics` object generates model diagnostics.
 
 
-`results.plot_diagnostics(figsize=(15, 12))
+`results.plot_diagnostics(figsize=(15, 12))`
 
 
-plt.show()`
+`plt.show()`
 
 
 We should always check that the residuals of the model are uncorrelated and normally distributed with zero-mean. If the seasonal ARIMA model does not satisfy these properties, then the model can be further improved.
@@ -606,22 +607,22 @@ Now, I will show how to use this time series model to forecast future values. Th
 object can compute forecasted values for a specified number of steps ahead.
 
 
-` Get forecast 100 steps ahead in future
+Get forecast 100 steps ahead in future
 
 
-pred_uc = results.get_forecast(steps=100)`
+`pred_uc = results.get_forecast(steps=100)`
 
 
-`Get confidence intervals of forecasts
+Get confidence intervals of forecasts
 
 
-pred_ci = pred_uc.conf_int()`
+`pred_ci = pred_uc.conf_int()`
 
 
-`ax = y.plot(label='observed', figsize=(20, 15))
+`ax = y.plot(label='observed', figsize=(20, 15))`
 
 
-pred_uc.predicted_mean.plot(ax=ax, label='forecast')`
+`pred_uc.predicted_mean.plot(ax=ax, label='forecast')`
 
 
 `ax.fill_between(pred_ci.index`,
